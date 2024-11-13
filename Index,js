@@ -1,0 +1,27 @@
+const express = require('express');
+
+
+const app = express();
+const port = 3000;
+
+const dashboardRoute = require('./routes/dashboardRoute');
+const mongoose = require('mongoose');
+
+const CONNECT_STR = "mongodb+srv://manjulabalamurugan13:balumanju%409695@cluster0.h2mk0.mongodb.net/User_dashboard?retryWrites=true&w=majority";
+
+mongoose.connect(CONNECT_STR)
+
+.then(() => {
+    console.log('Successfully connected to the database');
+  })
+  .catch((err) => {
+    console.error('Error connecting to the database:', err);
+  });
+
+app.use('/dashboard',dashboardRoute)
+
+
+app.listen(port, () => {
+    console.log(`Listening to the port on http://localhost:${port}`);
+});
+
